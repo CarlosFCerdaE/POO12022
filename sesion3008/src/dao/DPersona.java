@@ -14,7 +14,7 @@ import modelos.Sexo;
  * @author labc205
  */
 public class DPersona {
-    private ArrayList<Persona> listPersona;
+    private ArrayList<Persona> listPersona= new ArrayList<>();
 
     public DPersona() {
     }

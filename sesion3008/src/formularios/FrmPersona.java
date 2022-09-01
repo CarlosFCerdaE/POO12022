@@ -5,17 +5,25 @@
  */
 package formularios;
 
+import dao.DPersona;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelos.Sexo;
+
 /**
  *
  * @author labc205
  */
 public class FrmPersona extends javax.swing.JFrame {
-
+    DPersona dP = new DPersona();
     /**
      * Creates new form FrmPersona
      */
     public FrmPersona() {
         initComponents();
+        jBtnLimpiar.setToolTipText("Limpiar");
+        jBtnAgregar.setToolTipText("Agregar");
+        jCmbSexo.setSelectedIndex(-1);
     }
 
     /**
@@ -36,12 +44,12 @@ public class FrmPersona extends javax.swing.JFrame {
         jTfNombre = new javax.swing.JTextField();
         jTfApellido = new javax.swing.JTextField();
         jTfEmail = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTaPersona = new javax.swing.JTextArea();
         jCmbSexo = new javax.swing.JComboBox<>();
         jToolBar1 = new javax.swing.JToolBar();
         jBtnLimpiar = new javax.swing.JButton();
         jBtnAgregar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTblRegistros = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Listado de Personas");
@@ -56,10 +64,6 @@ public class FrmPersona extends javax.swing.JFrame {
 
         jLblSexo.setText("SEXO");
 
-        jTaPersona.setColumns(20);
-        jTaPersona.setRows(5);
-        jScrollPane1.setViewportView(jTaPersona);
-
         jCmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hombre", "Mujer" }));
         jCmbSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,7 +73,8 @@ public class FrmPersona extends javax.swing.JFrame {
 
         jToolBar1.setRollover(true);
 
-        jBtnLimpiar.setText("Limpiar");
+        jBtnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/complementos/img/Nuevo.png"))); // NOI18N
+        jBtnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnLimpiar.setFocusable(false);
         jBtnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBtnLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -80,49 +85,59 @@ public class FrmPersona extends javax.swing.JFrame {
         });
         jToolBar1.add(jBtnLimpiar);
 
-        jBtnAgregar.setText("Agregar");
+        jBtnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/complementos/img/Guardar.png"))); // NOI18N
+        jBtnAgregar.setToolTipText("");
+        jBtnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBtnAgregar.setFocusable(false);
         jBtnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBtnAgregar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAgregarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jBtnAgregar);
+
+        jTblRegistros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTblRegistros);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLblId)
-                    .addComponent(jLblNombre)
-                    .addComponent(jLblApellido)
-                    .addComponent(jLblEmail)
-                    .addComponent(jLblSexo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTfId, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTfApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
-                                .addGap(6, 6, 6)))
-                        .addGap(40, 40, 40))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLblId)
+                            .addComponent(jLblNombre)
+                            .addComponent(jLblApellido)
+                            .addComponent(jLblEmail)
+                            .addComponent(jLblSexo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTfId, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTfApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLblId)
                     .addComponent(jTfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -142,9 +157,9 @@ public class FrmPersona extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLblSexo)
                     .addComponent(jCmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         pack();
@@ -156,8 +171,56 @@ public class FrmPersona extends javax.swing.JFrame {
 
     private void jBtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLimpiarActionPerformed
         // TODO add your handling code here:
+       llenarTabla();
+       limpiar();
     }//GEN-LAST:event_jBtnLimpiarActionPerformed
 
+    private void jBtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAgregarActionPerformed
+        // TODO add your handling code here:
+        if (jTfId.getText().length()==0){
+            JOptionPane.showMessageDialog(this,"Necesita agregar el ID","Guardar",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int id = Integer.parseInt(jTfId.getText());
+        String nom = jTfNombre.getText();
+        String ape = jTfApellido.getText();
+        String email = jTfEmail.getText();
+        Sexo s;
+        if (jCmbSexo.getSelectedIndex()==0) s = Sexo.HOMBRE;
+        else s = Sexo.MUJER;
+        
+        int b = dP.agregarPersona(id, nom, ape, email, s);
+        if (b==1){
+            
+            llenarTabla();
+            JOptionPane.showMessageDialog(this, "Registro Agregado", "Guardar",JOptionPane.INFORMATION_MESSAGE);
+            limpiar();
+            
+        }
+        else{
+        
+            JOptionPane.showMessageDialog(this, "Error al guardar", "Guardar",JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jBtnAgregarActionPerformed
+
+    private void limpiar(){
+    
+        jTfId.setText("");
+        jTfNombre.setText("");
+        jTfApellido.setText("");
+        jTfEmail.setText("");
+        jCmbSexo.setSelectedIndex(-1);
+        
+        jTfId.requestFocus();
+    }
+    
+    private void llenarTabla(){
+        DefaultTableModel tbl = new DefaultTableModel();
+        tbl = dP.getListPers();
+        jTblRegistros.setModel(tbl);
+    
+    }
     /**
      * @param args the command line arguments
      */
@@ -202,8 +265,8 @@ public class FrmPersona extends javax.swing.JFrame {
     private javax.swing.JLabel jLblId;
     private javax.swing.JLabel jLblNombre;
     private javax.swing.JLabel jLblSexo;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTaPersona;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTblRegistros;
     private javax.swing.JTextField jTfApellido;
     private javax.swing.JTextField jTfEmail;
     private javax.swing.JTextField jTfId;
