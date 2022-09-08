@@ -17,6 +17,7 @@ import modelos.Sexo;
 public class FrmPersona extends javax.swing.JFrame {
 
     DPersona dP = new DPersona();
+    private int pos = 0;
 
     /**
      * Creates new form FrmPersona
@@ -50,8 +51,8 @@ public class FrmPersona extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jBtnLimpiar = new javax.swing.JButton();
         jBtnAgregar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBtnEditar = new javax.swing.JButton();
+        jBtnEliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jBtnPrimero = new javax.swing.JButton();
         jBtnAnterior = new javax.swing.JButton();
@@ -107,22 +108,29 @@ public class FrmPersona extends javax.swing.JFrame {
         });
         jToolBar1.add(jBtnAgregar);
 
-        jButton1.setText("jButton1");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/complementos/img/editar.png"))); // NOI18N
+        jBtnEditar.setEnabled(false);
+        jBtnEditar.setFocusable(false);
+        jBtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBtnEditarActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar1.add(jBtnEditar);
 
-        jButton2.setText("jButton2");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        jBtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/complementos/img/Eliminar.png"))); // NOI18N
+        jBtnEliminar.setEnabled(false);
+        jBtnEliminar.setFocusable(false);
+        jBtnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnEliminarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBtnEliminar);
         jToolBar1.add(jSeparator1);
 
         jBtnPrimero.setText("|<");
@@ -140,12 +148,22 @@ public class FrmPersona extends javax.swing.JFrame {
         jBtnAnterior.setFocusable(false);
         jBtnAnterior.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBtnAnterior.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAnteriorActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jBtnAnterior);
 
         jBtnSiguiente.setText(">>");
         jBtnSiguiente.setFocusable(false);
         jBtnSiguiente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jBtnSiguiente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSiguienteActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jBtnSiguiente);
 
         jBtnUltimo.setText(">|");
@@ -270,22 +288,14 @@ public class FrmPersona extends javax.swing.JFrame {
 
     private void jBtnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnUltimoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jBtnUltimoActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jBtnPrimeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPrimeroActionPerformed
-        // TODO add your handling code here:
-        if (!dP.getListPersona().isEmpty()) {
+         if (!dP.getListPersona().isEmpty()) {
             try {
-                int id = dP.getListPersona().get(0).getId();
-                String nombre = dP.getListPersona().get(0).getNombre();
-                String apellido = dP.getListPersona().get(0).getApellido();
-                String email = dP.getListPersona().get(0).getEmail();
-                Sexo sexo = dP.getListPersona().get(0).getSexo();
+                pos = dP.getListPersona().size()-1;
+                int id = dP.getListPersona().get(pos).getId();
+                String nombre = dP.getListPersona().get(pos).getNombre();
+                String apellido = dP.getListPersona().get(pos).getApellido();
+                String email = dP.getListPersona().get(pos).getEmail();
+                Sexo sexo = dP.getListPersona().get(pos).getSexo();
 
                 jTfId.setText("" + id);
                 jTfNombre.setText(nombre);
@@ -296,6 +306,60 @@ public class FrmPersona extends javax.swing.JFrame {
                 } else {
                     jCmbSexo.setSelectedIndex(1);
                 }
+                jBtnAgregar.setEnabled(false);
+                jBtnEditar.setEnabled(true);
+                jBtnEliminar.setEnabled(true);
+
+            } catch (Exception ex) {
+
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "No hay registros","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_jBtnUltimoActionPerformed
+
+    private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
+        // TODO add your handling code here:
+        dP.getListPersona().get(pos).setId(Integer.parseInt(jTfId.getText()));
+        dP.getListPersona().get(pos).setNombre(jTfNombre.getText());
+        dP.getListPersona().get(pos).setApellido(jTfApellido.getText());
+        dP.getListPersona().get(pos).setEmail(jTfEmail.getText());
+        if(jCmbSexo.getSelectedIndex()==0)dP.getListPersona().get(pos).setSexo(Sexo.HOMBRE);
+        else dP.getListPersona().get(pos).setSexo(Sexo.MUJER);
+        JOptionPane.showMessageDialog(this, "Cambios realizados...","Editar",JOptionPane.INFORMATION_MESSAGE);
+        llenarTabla();
+        limpiar();
+        
+
+    }//GEN-LAST:event_jBtnEditarActionPerformed
+
+    private void jBtnPrimeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPrimeroActionPerformed
+        // TODO add your handling code here:
+        if (!dP.getListPersona().isEmpty()) {
+            try {
+                pos = 0;
+                int id = dP.getListPersona().get(pos).getId();
+                String nombre = dP.getListPersona().get(pos).getNombre();
+                String apellido = dP.getListPersona().get(pos).getApellido();
+                String email = dP.getListPersona().get(pos).getEmail();
+                Sexo sexo = dP.getListPersona().get(pos).getSexo();
+
+                jTfId.setText("" + id);
+                jTfNombre.setText(nombre);
+                jTfApellido.setText(apellido);
+                jTfEmail.setText(email);
+                if (sexo == Sexo.HOMBRE) {
+                    jCmbSexo.setSelectedIndex(0);
+                } else {
+                    jCmbSexo.setSelectedIndex(1);
+                }
+                jBtnAgregar.setEnabled(false);
+                jBtnEditar.setEnabled(true);
+                jBtnEliminar.setEnabled(true);
 
             } catch (Exception ex) {
 
@@ -308,6 +372,95 @@ public class FrmPersona extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBtnPrimeroActionPerformed
 
+    private void jBtnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAnteriorActionPerformed
+        // TODO add your handling code here:
+        if (!dP.getListPersona().isEmpty()) {
+            try {
+                pos --;
+                if (pos<0)pos = dP.getListPersona().size()-1;
+                int id = dP.getListPersona().get(pos).getId();
+                String nombre = dP.getListPersona().get(pos).getNombre();
+                String apellido = dP.getListPersona().get(pos).getApellido();
+                String email = dP.getListPersona().get(pos).getEmail();
+                Sexo sexo = dP.getListPersona().get(pos).getSexo();
+
+                jTfId.setText("" + id);
+                jTfNombre.setText(nombre);
+                jTfApellido.setText(apellido);
+                jTfEmail.setText(email);
+                if (sexo == Sexo.HOMBRE) {
+                    jCmbSexo.setSelectedIndex(0);
+                } else {
+                    jCmbSexo.setSelectedIndex(1);
+                }
+                jBtnAgregar.setEnabled(false);
+                jBtnEditar.setEnabled(true);
+                jBtnEliminar.setEnabled(true);
+
+            } catch (Exception ex) {
+
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "No hay registros","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBtnAnteriorActionPerformed
+
+    private void jBtnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSiguienteActionPerformed
+        // TODO add your handling code here:
+        if (!dP.getListPersona().isEmpty()) {
+            try {
+                pos ++;
+                if (pos == dP.getListPersona().size())pos = 0;
+                int id = dP.getListPersona().get(pos).getId();
+                String nombre = dP.getListPersona().get(pos).getNombre();
+                String apellido = dP.getListPersona().get(pos).getApellido();
+                String email = dP.getListPersona().get(pos).getEmail();
+                Sexo sexo = dP.getListPersona().get(pos).getSexo();
+
+                jTfId.setText("" + id);
+                jTfNombre.setText(nombre);
+                jTfApellido.setText(apellido);
+                jTfEmail.setText(email);
+                if (sexo == Sexo.HOMBRE) {
+                    jCmbSexo.setSelectedIndex(0);
+                } else {
+                    jCmbSexo.setSelectedIndex(1);
+                }
+                jBtnAgregar.setEnabled(false);
+                jBtnEditar.setEnabled(true);
+                jBtnEliminar.setEnabled(true);
+
+            } catch (Exception ex) {
+
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "No hay registros","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jBtnSiguienteActionPerformed
+
+    private void jBtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEliminarActionPerformed
+        // TODO add your handling code here:
+        int op;
+        op = JOptionPane.showConfirmDialog(this, "Desea Eliminar?","Eliminar",JOptionPane.YES_NO_OPTION);
+        if (op ==0){
+            dP.getListPersona().remove(pos);
+            JOptionPane.showMessageDialog(this, "Ok");
+            llenarTabla();
+            limpiar();
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Operación cancelada");
+        }
+        
+        
+    }//GEN-LAST:event_jBtnEliminarActionPerformed
+
     private void limpiar() {
 
         jTfId.setText("");
@@ -316,6 +469,9 @@ public class FrmPersona extends javax.swing.JFrame {
         jTfEmail.setText("");
         jCmbSexo.setSelectedIndex(-1);
 
+        jBtnAgregar.setEnabled(true);
+        jBtnEditar.setEnabled(false);
+        jBtnEliminar.setEnabled(false);
         jTfId.requestFocus();
     }
 
@@ -364,12 +520,12 @@ public class FrmPersona extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAgregar;
     private javax.swing.JButton jBtnAnterior;
+    private javax.swing.JButton jBtnEditar;
+    private javax.swing.JButton jBtnEliminar;
     private javax.swing.JButton jBtnLimpiar;
     private javax.swing.JButton jBtnPrimero;
     private javax.swing.JButton jBtnSiguiente;
     private javax.swing.JButton jBtnUltimo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jCmbSexo;
     private javax.swing.JLabel jLblApellido;
     private javax.swing.JLabel jLblEmail;
