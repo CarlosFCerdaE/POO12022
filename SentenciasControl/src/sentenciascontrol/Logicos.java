@@ -5,18 +5,15 @@
  */
 package sentenciascontrol;
 
-import modelos.MLogico;
-
 import javax.swing.JOptionPane;
+import modelos.MLogico;
 
 /**
  *
  * @author Armando J. López L.
  */
 public class Logicos extends javax.swing.JInternalFrame {
-
     MLogico logico = new MLogico();
-
     /**
      * Creates new form Logicos
      */
@@ -112,40 +109,75 @@ public class Logicos extends javax.swing.JInternalFrame {
         lvs3.setText("vs.");
 
         bCalcular3.setText("Calcular");
+        bCalcular3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCalcular3ActionPerformed(evt);
+            }
+        });
 
         lEjer4.setText("4. Introduzca dos números para calcular el valor de verdad");
 
         lcompara4.setText(">=");
 
         bCalcular4.setText("Calcular");
+        bCalcular4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCalcular4ActionPerformed(evt);
+            }
+        });
 
         lEjer5.setText("5. Introduzca dos números para calcular el valor de verdad");
 
         lcompara5.setText("<=");
 
         bCalcular5.setText("Calcular");
+        bCalcular5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCalcular5ActionPerformed(evt);
+            }
+        });
 
         lEjer6.setText("6. Introduzca dos caracteres para verificar si son iguales");
 
         lvs5.setText("vs.");
 
         bVerificar6.setText("Verificar");
+        bVerificar6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVerificar6ActionPerformed(evt);
+            }
+        });
 
         lEjer7.setText("7. Introduzca dos caracteres para verificar si son diferentes");
 
         lvs6.setText("vs.");
 
         bVerificar7.setText("Verificar");
+        bVerificar7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVerificar7ActionPerformed(evt);
+            }
+        });
 
         lEjer8.setText("8. Introduzca dos cadenas de caracteres para verificar si son iguales");
 
         lvs7.setText("vs.");
 
         bVerificar8.setText("Verificar");
+        bVerificar8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVerificar8ActionPerformed(evt);
+            }
+        });
 
         lEjer9.setText("9. Introduzca dos cadenas de caracteres para calcular la mayor");
 
         bCalcular9.setText("Calcular");
+        bCalcular9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCalcular9ActionPerformed(evt);
+            }
+        });
 
         lvs8.setText("vs.");
 
@@ -349,36 +381,129 @@ public class Logicos extends javax.swing.JInternalFrame {
 
     private void bVerificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerificar1ActionPerformed
         // TODO add your handling code here:
-        try {
-            boolean resp = logico.sonIguales(Double.parseDouble(tfNum1.getText()), Double.parseDouble(tfNum2.getText()));
-            if (resp) {
-                JOptionPane.showMessageDialog(this, "Los numeros son iguales", "Respuesta", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Los numeros son diferentes", "Respuesta", JOptionPane.WARNING_MESSAGE);
-            }
-        }catch (Exception ex){
+        try{
+            double num1 = Double.parseDouble(tfNum1.getText());
+            double num2 = Double.parseDouble(tfNum2.getText());
+            boolean resp = logico.sonIguales(num1, num2);
+            if(resp) JOptionPane.showMessageDialog(this, "Son iguales",
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "No son iguales",
+                "Respuesta", JOptionPane.WARNING_MESSAGE);
+        }catch(Exception ex){
             JOptionPane.showMessageDialog(this, ex.getMessage());
-            
         }
-        
     }//GEN-LAST:event_bVerificar1ActionPerformed
 
     private void bCalcular2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCalcular2ActionPerformed
         // TODO add your handling code here:
-        try {
-            boolean resp = logico.sonIguales(Double.parseDouble(tfNum1.getText()), Double.parseDouble(tfNum2.getText()));
-            if (resp) {
-                JOptionPane.showMessageDialog(this, "Los numeros son iguales", "Respuesta", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Los numeros son diferentes", "Respuesta", JOptionPane.WARNING_MESSAGE);
-            }
-        }catch (Exception ex){
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+        try{
+            double num1 = Double.parseDouble(tfNum3.getText());
+            double num2 = Double.parseDouble(tfNum4.getText());
+            double resp = logico.numeroMayor(num1, num2);
+            JOptionPane.showMessageDialog(this, "El numero mayor es "+resp,
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
             
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_bCalcular2ActionPerformed
 
-   
+    private void bCalcular3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCalcular3ActionPerformed
+        // TODO add your handling code here:
+        try{
+            double num1 = Double.parseDouble(tfNum5.getText());
+            double num2 = Double.parseDouble(tfNum6.getText());
+            double resp = logico.numeroMenor(num1, num2);
+            JOptionPane.showMessageDialog(this, "El numero menor es "+resp,
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_bCalcular3ActionPerformed
+
+    private void bCalcular4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCalcular4ActionPerformed
+        // TODO add your handling code here:
+        try{
+            double num1 = Double.parseDouble(tfNum7.getText());
+            double num2 = Double.parseDouble(tfNum8.getText());
+            boolean resp = logico.esMayor(num1, num2);
+            if(resp) JOptionPane.showMessageDialog(this, "Es verdadero",
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Es falso",
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_bCalcular4ActionPerformed
+
+    private void bCalcular5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCalcular5ActionPerformed
+        // TODO add your handling code here:
+        try{
+            double num1 = Double.parseDouble(tfNum9.getText());
+            double num2 = Double.parseDouble(tfNum10.getText());
+            boolean resp = logico.esMenor(num1, num2);
+            if(resp) JOptionPane.showMessageDialog(this, "Es verdadero",
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Es falso",
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_bCalcular5ActionPerformed
+
+    private void bVerificar6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerificar6ActionPerformed
+        // TODO add your handling code here:
+        try{
+            boolean resp = logico.caracteresIguales(tfCaracter1.getText(), tfCaracter2.getText());
+            if(resp) JOptionPane.showMessageDialog(this, "Son iguales",
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Son diferentes",
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_bVerificar6ActionPerformed
+
+    private void bVerificar7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerificar7ActionPerformed
+        // TODO add your handling code here:
+        try{
+            boolean resp = logico.caracteresIguales(tfCaracter3.getText(), tfCaracter4.getText());
+            if(!resp) JOptionPane.showMessageDialog(this, "Son diferentes",
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Son iguales",
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_bVerificar7ActionPerformed
+
+    private void bVerificar8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVerificar8ActionPerformed
+        // TODO add your handling code here:
+        try{
+            boolean resp = logico.caracteresIguales(tfCadena1.getText(), tfCadena2.getText());
+            if(resp) JOptionPane.showMessageDialog(this, "Son iguales",
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+            else JOptionPane.showMessageDialog(this, "Son diferentes",
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_bVerificar8ActionPerformed
+
+    private void bCalcular9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCalcular9ActionPerformed
+        // TODO add your handling code here:
+        try{
+            String cadena = logico.cadenaMayor(tfCadena3.getText(), tfCadena4.getText());
+            JOptionPane.showMessageDialog(this, "La cadena mayor es "+cadena,
+                "Respuesta", JOptionPane.INFORMATION_MESSAGE);
+          
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_bCalcular9ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCalcular2;
