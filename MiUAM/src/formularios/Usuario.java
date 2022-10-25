@@ -5,17 +5,22 @@
  */
 package formularios;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author labc205
  */
 public class Usuario extends javax.swing.JInternalFrame {
-
+     private dao.Usuario lista = new dao.Usuario();
+     
     /**
      * Creates new form Usuario
      */
     public Usuario() {
         initComponents();
+        jtblTablaUsuarios.setModel(generarTabla());
     }
 
     /**
@@ -27,24 +32,255 @@ public class Usuario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jlblUsuario = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jtfUsuario = new javax.swing.JTextField();
+        jtfNombres = new javax.swing.JTextField();
+        jtfApellidos = new javax.swing.JTextField();
+        jtfCorreo = new javax.swing.JTextField();
+        jpwContra = new javax.swing.JPasswordField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtblTablaUsuarios = new javax.swing.JTable();
+        jToolBar1 = new javax.swing.JToolBar();
+        jbtnNuevo = new javax.swing.JButton();
+        jbtnGuardar = new javax.swing.JButton();
+        jbtnEditar = new javax.swing.JButton();
+        jbtnEliminar = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Usuarios");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Generales"));
+
+        jlblUsuario.setText("Usuario");
+
+        jLabel2.setText("Nombres");
+
+        jLabel3.setText("Apellidos");
+
+        jLabel4.setText("Correo Electronico");
+
+        jLabel5.setText("Contraseña");
+
+        jtfUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfUsuarioActionPerformed(evt);
+            }
+        });
+
+        jtfNombres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNombresActionPerformed(evt);
+            }
+        });
+
+        jtfApellidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfApellidosActionPerformed(evt);
+            }
+        });
+
+        jtfCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCorreoActionPerformed(evt);
+            }
+        });
+
+        jpwContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jpwContraActionPerformed(evt);
+            }
+        });
+
+        jtblTablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jtblTablaUsuarios);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jlblUsuario, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtfApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                            .addComponent(jtfNombres, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                            .addComponent(jtfUsuario)
+                            .addComponent(jpwContra))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlblUsuario)
+                            .addComponent(jtfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jpwContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jtfNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jtfApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jtfCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 182, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        jToolBar1.setRollover(true);
+
+        jbtnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/formularios/complementos/img/Nuevo.png"))); // NOI18N
+        jbtnNuevo.setToolTipText("Nuevo");
+        jbtnNuevo.setFocusable(false);
+        jbtnNuevo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnNuevo.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbtnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnNuevoActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jbtnNuevo);
+
+        jbtnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/formularios/complementos/img/Guardar.png"))); // NOI18N
+        jbtnGuardar.setToolTipText("Guardar");
+        jbtnGuardar.setFocusable(false);
+        jbtnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnGuardar.setName(""); // NOI18N
+        jbtnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnGuardarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jbtnGuardar);
+
+        jbtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/formularios/complementos/img/editar.png"))); // NOI18N
+        jbtnEditar.setToolTipText("Editar");
+        jbtnEditar.setFocusable(false);
+        jbtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jbtnEditar);
+
+        jbtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/formularios/complementos/img/Eliminar.png"))); // NOI18N
+        jbtnEliminar.setToolTipText("Eliminar");
+        jbtnEliminar.setFocusable(false);
+        jbtnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jbtnEliminar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtfUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfUsuarioActionPerformed
+
+    private void jtfNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfNombresActionPerformed
+
+    private void jtfApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfApellidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfApellidosActionPerformed
+
+    private void jtfCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCorreoActionPerformed
+
+    private void jpwContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jpwContraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jpwContraActionPerformed
+
+    private void jbtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNuevoActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_jbtnNuevoActionPerformed
+
+    private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
+        // TODO add your handling code here:
+        lista.agregarUsuario(jtfUsuario.getText(), jpwContra.getText(),jtfNombres.getText(),jtfApellidos.getText(),jtfCorreo.getText());
+    }//GEN-LAST:event_jbtnGuardarActionPerformed
+
+    private void limpiar(){
+        jtfUsuario.setText("");
+        jpwContra.setText("");
+        jtfNombres.setText("");
+        jtfApellidos.setText("");
+        jtfCorreo.setText("");
+        jtfUsuario.requestFocus();
+    }
     /**
      * @param args the command line arguments
      */
@@ -81,5 +317,54 @@ public class Usuario extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JButton jbtnEditar;
+    private javax.swing.JButton jbtnEliminar;
+    private javax.swing.JButton jbtnGuardar;
+    private javax.swing.JButton jbtnNuevo;
+    private javax.swing.JLabel jlblUsuario;
+    private javax.swing.JPasswordField jpwContra;
+    private javax.swing.JTable jtblTablaUsuarios;
+    private javax.swing.JTextField jtfApellidos;
+    private javax.swing.JTextField jtfCorreo;
+    private javax.swing.JTextField jtfNombres;
+    private javax.swing.JTextField jtfUsuario;
     // End of variables declaration//GEN-END:variables
+
+    public dao.Usuario getLista() {
+        return lista;
+    }
+
+    public void setLista(dao.Usuario lista) {
+        this.lista = lista;
+    }
+    
+    private DefaultTableModel generarTabla(){
+        DefaultTableModel dtm = new DefaultTableModel();
+        try{
+            String titulos[]={"ID","NOMBRES","EMAIL"};
+            dtm.setColumnIdentifiers(titulos);
+            Object fila[] = new Object[3];
+            int i=0;
+            while(i<lista.getLista().size()){
+                fila[0] = lista.getLista().get(i).getUserName();
+                fila[1] = lista.getLista().get(i).getNombres()+" "+lista.getLista().get(i).getApellidos();
+                fila[2] = lista.getLista().get(i).getEmail();
+                dtm.addRow(fila);
+                i++;
+            }
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Error: "+ex.getMessage(),"Error al generar tabla",JOptionPane.WARNING_MESSAGE);
+        }
+        return dtm;
+    }
 }

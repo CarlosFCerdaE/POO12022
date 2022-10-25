@@ -159,6 +159,7 @@ public class Login extends javax.swing.JFrame {
         }
         if(usuarios.autenticarUsuario(usuario, pw)) {
             Menu mnu = new Menu();
+            mnu.setLista(usuarios);
             mnu.setVisible(true);
             dispose();
         }
