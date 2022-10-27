@@ -5,6 +5,7 @@
  */
 package formularios;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 
@@ -53,12 +54,22 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Usuario");
 
         jTFUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTFUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTFUsuarioKeyReleased(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Contraseña");
 
         jPFContrasena.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPFContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jPFContrasenaKeyReleased(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 255)));
 
@@ -66,6 +77,11 @@ public class Login extends javax.swing.JFrame {
         jBtnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnOKActionPerformed(evt);
+            }
+        });
+        jBtnOK.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jBtnOKKeyReleased(evt);
             }
         });
 
@@ -150,16 +166,40 @@ public class Login extends javax.swing.JFrame {
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
         // TODO add your handling code here:
-        String usuario = jTFUsuario.getText();
-        String pw = jPFContrasena.getText();
+        validar();
         
+    }//GEN-LAST:event_jBtnOKActionPerformed
+
+    private void jBtnOKKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBtnOKKeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            validar();
+        }
+    }//GEN-LAST:event_jBtnOKKeyReleased
+
+    private void jPFContrasenaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPFContrasenaKeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            validar();
+        }
+    }//GEN-LAST:event_jPFContrasenaKeyReleased
+
+    private void jTFUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsuarioKeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            jPFContrasena.requestFocus();
+        }
+        
+    }//GEN-LAST:event_jTFUsuarioKeyReleased
+
+    private void validar(){
+  
         if(intentos==3){
             JOptionPane.showMessageDialog(this, "Error","Demasiados intentos fallidos",JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
-        if(usuarios.autenticarUsuario(usuario, pw)) {
-            Menu mnu = new Menu();
-            mnu.setLista(usuarios);
+        if(usuarios.autenticarUsuario(jTFUsuario.getText(), jPFContrasena.getText())) {
+            Menu mnu = new Menu(usuarios);
             mnu.setVisible(true);
             dispose();
         }
@@ -167,8 +207,7 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalido");
             intentos++;
         }
-    }//GEN-LAST:event_jBtnOKActionPerformed
-
+    }
     /**
      * @param args the command line arguments
      */

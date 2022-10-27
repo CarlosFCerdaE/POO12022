@@ -29,6 +29,17 @@ public class Usuario {
         this.lista.add(new modelos.Usuario(user,pw,nombres,apellidos,email));
     }
     
+    public void editarUsuario (String user, String pw, String nombres, String apellidos, String email){
+        for(modelos.Usuario foruser: this.lista){
+            if(foruser.existe(user)){
+                foruser.setPw(pw);
+                foruser.setNombres(nombres);
+                foruser.setApellidos(apellidos);
+                foruser.setEmail(email);
+            }
+        }
+    }
+    
     public boolean autenticarUsuario (String user, String pw){
         for(modelos.Usuario us: this.lista){
             if(us.verificarUsuario(user, pw)) return true;

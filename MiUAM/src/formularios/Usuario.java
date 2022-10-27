@@ -5,6 +5,7 @@
  */
 package formularios;
 
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +21,11 @@ public class Usuario extends javax.swing.JInternalFrame {
      */
     public Usuario() {
         initComponents();
+    }
+    
+    public Usuario(dao.Usuario user){
+        initComponents();
+        this.lista = user;
         jtblTablaUsuarios.setModel(generarTabla());
     }
 
@@ -120,6 +126,21 @@ public class Usuario extends javax.swing.JInternalFrame {
 
             }
         ));
+        jtblTablaUsuarios.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtblTablaUsuariosFocusGained(evt);
+            }
+        });
+        jtblTablaUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblTablaUsuariosMouseClicked(evt);
+            }
+        });
+        jtblTablaUsuarios.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtblTablaUsuariosKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(jtblTablaUsuarios);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -209,13 +230,20 @@ public class Usuario extends javax.swing.JInternalFrame {
 
         jbtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/formularios/complementos/img/editar.png"))); // NOI18N
         jbtnEditar.setToolTipText("Editar");
+        jbtnEditar.setEnabled(false);
         jbtnEditar.setFocusable(false);
         jbtnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnEditar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbtnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEditarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jbtnEditar);
 
         jbtnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/formularios/complementos/img/Eliminar.png"))); // NOI18N
         jbtnEliminar.setToolTipText("Eliminar");
+        jbtnEliminar.setEnabled(false);
         jbtnEliminar.setFocusable(false);
         jbtnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jbtnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -266,20 +294,55 @@ public class Usuario extends javax.swing.JInternalFrame {
     private void jbtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNuevoActionPerformed
         // TODO add your handling code here:
         limpiar();
+        jbtnGuardar.setEnabled(true);
+        jbtnEliminar.setEnabled(false);
+        jbtnEditar.setEnabled(false);
     }//GEN-LAST:event_jbtnNuevoActionPerformed
 
     private void jbtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnGuardarActionPerformed
         // TODO add your handling code here:
         lista.agregarUsuario(jtfUsuario.getText(), jpwContra.getText(),jtfNombres.getText(),jtfApellidos.getText(),jtfCorreo.getText());
+        limpiar();
+        jbtnEditar.setEnabled(false);
+        jbtnEliminar.setEnabled(false);
+        
     }//GEN-LAST:event_jbtnGuardarActionPerformed
 
+    private void jtblTablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblTablaUsuariosMouseClicked
+        // TODO add your handling code here:
+        obtenerUsuariodeTabla();
+    }//GEN-LAST:event_jtblTablaUsuariosMouseClicked
+
+    private void jtblTablaUsuariosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtblTablaUsuariosFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtblTablaUsuariosFocusGained
+
+    private void jtblTablaUsuariosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtblTablaUsuariosKeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_DOWN||evt.getKeyCode()==KeyEvent.VK_UP){
+            obtenerUsuariodeTabla();
+        }
+    }//GEN-LAST:event_jtblTablaUsuariosKeyReleased
+
+    private void jbtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditarActionPerformed
+        // TODO add your handling code here:
+        lista.editarUsuario(jtfUsuario.getText(),String.valueOf(jpwContra.getPassword()), jtfNombres.getText(), jtfApellidos.getText(), jtfCorreo.getText());
+        limpiar();
+        
+        jbtnGuardar.setEnabled(true);
+        jbtnEditar.setEnabled(false);
+        jbtnEliminar.setEnabled(false);
+    }//GEN-LAST:event_jbtnEditarActionPerformed
+
     private void limpiar(){
+        jtblTablaUsuarios.setModel(generarTabla());
         jtfUsuario.setText("");
         jpwContra.setText("");
         jtfNombres.setText("");
         jtfApellidos.setText("");
         jtfCorreo.setText("");
         jtfUsuario.requestFocus();
+        
     }
     /**
      * @param args the command line arguments
@@ -366,5 +429,23 @@ public class Usuario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error: "+ex.getMessage(),"Error al generar tabla",JOptionPane.WARNING_MESSAGE);
         }
         return dtm;
+    }
+    
+    public void obtenerUsuariodeTabla(){
+        try{
+            int i=jtblTablaUsuarios.getSelectedRow();
+            jtfUsuario.setText(lista.getLista().get(i).getUserName());
+            jpwContra.setText(lista.getLista().get(i).getPw());
+            jtfNombres.setText(lista.getLista().get(i).getNombres());
+            jtfApellidos.setText(lista.getLista().get(i).getApellidos());
+            jtfCorreo.setText(lista.getLista().get(i).getEmail());
+            this.jbtnGuardar.setEnabled(false);
+            this.jbtnEditar.setEnabled(true);
+            this.jbtnEliminar.setEnabled(true);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+        
     }
 }

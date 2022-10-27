@@ -21,6 +21,7 @@ public class Main {
         Usuario usuarios = new Usuario();
         usuarios.agregarUsuario("18020323", "123", "Carlos", "Cerda", "cfcerda@uamv.edu.ni");
         usuarios.agregarUsuario("21011522", "147", "Carlos", "Gurdian", "cgurdian@uamv.edu.ni");
+        usuarios.agregarUsuario("19014659", "456", "Synthia", "Gonzalez", "cgurdian@uamv.edu.ni");
         
         Login login = new Login();
         login.usuarios = usuarios;
@@ -30,6 +31,7 @@ public class Main {
         Usuario usuarios = new Usuario();
         usuarios.agregarUsuario("18020323", "123", "Carlos", "Cerda", "cfcerda@uamv.edu.ni");
         usuarios.agregarUsuario("21011522", "147", "Carlos", "Gurdian", "cgurdian@uamv.edu.ni");
+        usuarios.agregarUsuario("19014659", "456", "Synthia", "Gonzalez", "cgurdian@uamv.edu.ni");
         
         Login login = new Login();
         login.usuarios = usuarios;
