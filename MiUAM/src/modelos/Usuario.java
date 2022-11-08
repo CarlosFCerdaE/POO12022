@@ -75,4 +75,9 @@ public class Usuario {
         return this.userName.equals(user);
     }
     
+    @Override
+    public String toString() {
+        return "Usuario{" + "userName=" + userName + ", pw=" + pw + ", nombres=" + nombres + ", apellidos=" + apellidos + ", email=" + email + '}';
+    }
+    
 }

@@ -46,5 +46,27 @@ public class Usuario {
         }
         return false;
     }
+    public boolean eliminarUsuario(String userName){
+        for (modelos.Usuario usuario : this.lista){
+            if(usuario.existe(userName)){
+                this.lista.remove(usuario);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public ArrayList buscarXNombre(String valor){
+        ArrayList<modelos.Usuario> resultado = 
+                new ArrayList<>();
+        for(modelos.Usuario usuario : this.lista){
+            String userN = usuario.getNombres().toUpperCase()
+                    +  " " +usuario.getApellidos().toUpperCase();
+            if(userN.startsWith(valor.toUpperCase())){
+                resultado.add(usuario);
+            }
+        }
+        return resultado;
+    }
     
 }

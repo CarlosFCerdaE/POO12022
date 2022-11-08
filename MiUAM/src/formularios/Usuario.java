@@ -8,6 +8,7 @@ package formularios;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Usuario extends javax.swing.JInternalFrame {
      private dao.Usuario lista = new dao.Usuario();
+     int fila=-1;
      
     /**
      * Creates new form Usuario
@@ -58,6 +60,9 @@ public class Usuario extends javax.swing.JInternalFrame {
         jbtnGuardar = new javax.swing.JButton();
         jbtnEditar = new javax.swing.JButton();
         jbtnEliminar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jtfValor = new javax.swing.JTextField();
+        jbtnBuscar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -249,6 +254,27 @@ public class Usuario extends javax.swing.JInternalFrame {
         jbtnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jbtnEliminar);
 
+        jLabel1.setText("Buscar por nombres:");
+        jToolBar1.add(jLabel1);
+
+        jtfValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfValorActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jtfValor);
+
+        jbtnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/formularios/complementos/img/buscar.png"))); // NOI18N
+        jbtnBuscar.setFocusable(false);
+        jbtnBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jbtnBuscar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jbtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnBuscarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jbtnBuscar);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -334,6 +360,18 @@ public class Usuario extends javax.swing.JInternalFrame {
         jbtnEliminar.setEnabled(false);
     }//GEN-LAST:event_jbtnEditarActionPerformed
 
+    private void jtfValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfValorActionPerformed
+
+    private void jbtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnBuscarActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Object> newLista=
+                new ArrayList<>();
+        String valor = this.jtfValor.getText();
+        newLista = lista.buscarXNombre(valor);
+    }//GEN-LAST:event_jbtnBuscarActionPerformed
+
     private void limpiar(){
         jtblTablaUsuarios.setModel(generarTabla());
         jtfUsuario.setText("");
@@ -380,6 +418,7 @@ public class Usuario extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -389,6 +428,7 @@ public class Usuario extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JButton jbtnBuscar;
     private javax.swing.JButton jbtnEditar;
     private javax.swing.JButton jbtnEliminar;
     private javax.swing.JButton jbtnGuardar;
@@ -400,6 +440,7 @@ public class Usuario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtfCorreo;
     private javax.swing.JTextField jtfNombres;
     private javax.swing.JTextField jtfUsuario;
+    private javax.swing.JTextField jtfValor;
     // End of variables declaration//GEN-END:variables
 
     public dao.Usuario getLista() {
